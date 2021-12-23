@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plant_disease_detector/src/home_page/home.dart';
+import 'package:plant_disease_detector/src/suggestions_page/suggestions.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,15 +11,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Detect diseases',
-      theme: ThemeData(
-          primarySwatch: Colors.green,
-          fontFamily: 'SFRegular'
-        ),
-      home: const Home(),
+      theme: ThemeData(primarySwatch: Colors.green, fontFamily: 'SFRegular'),
+      home: const Suggestions(),
     );
   }
 }
