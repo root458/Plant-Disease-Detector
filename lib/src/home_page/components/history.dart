@@ -14,7 +14,7 @@ class HistorySection extends SliverFixedExtentList {
                   child: ListView(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
                     addAutomaticKeepAlives: false,
-                    itemExtent: size.width*0.9,
+                    itemExtent: size.width * 0.9,
                     scrollDirection: Axis.horizontal,
                     children: [
                       _returnHistoryContainer(),
@@ -37,7 +37,8 @@ Widget _returnHistoryContainer() {
     child: Container(
         decoration: BoxDecoration(
             image: const DecorationImage(
-                image: AssetImage('assets/images/pepper.jpg'), fit: BoxFit.cover),
+                image: AssetImage('assets/images/pepper.jpg'),
+                fit: BoxFit.cover),
             boxShadow: const [
               BoxShadow(
                 color: kAccent,
@@ -53,9 +54,17 @@ Widget _returnHistoryContainer() {
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
               Text('Disease: Pepper Blight',
-                  style: TextStyle(color: kWhite, fontSize: 15.0, fontFamily: 'SFBold',)),
+                  style: TextStyle(
+                    color: kWhite,
+                    fontSize: 15.0,
+                    fontFamily: 'SFBold',
+                  )),
               Text('Date: 12/07/2021',
-                  style: TextStyle(color: kWhite, fontSize: 15.0, fontFamily: 'SFBold',)),
+                  style: TextStyle(
+                    color: kWhite,
+                    fontSize: 15.0,
+                    fontFamily: 'SFBold',
+                  )),
             ],
           ),
         )),

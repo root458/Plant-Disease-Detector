@@ -15,7 +15,21 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Detect diseases',
       theme: ThemeData(primarySwatch: Colors.green, fontFamily: 'SFRegular'),
-      home: const Suggestions(),
+      // home: const Home(),
+      onGenerateRoute: (RouteSettings routeSettings) {
+        return MaterialPageRoute<void>(
+            settings: routeSettings,
+            builder: (BuildContext context) {
+              switch (routeSettings.name) {
+                case Suggestions.routeName:
+                  return const Suggestions();
+                case Home.routeName:
+                default:
+                  return const Home();
+                
+              }
+            });
+      },
     );
   }
 }

@@ -6,6 +6,8 @@ import 'package:plant_disease_detector/src/suggestions_page/components/text_prop
 class Suggestions extends StatelessWidget {
   const Suggestions({Key? key}) : super(key: key);
 
+  static const routeName = '/suggestions';
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
