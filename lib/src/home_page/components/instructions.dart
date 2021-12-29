@@ -28,7 +28,7 @@ class InstructionsSection extends SliverFixedExtentList {
                               ),
                             ),
                             title: Text(
-                              'Take/Select a photo of an affected plant by clicking the camera button below',
+                              'Take/Select a photo of an affected plant by tapping the camera button below',
                               style: TextStyle(color: kWhite),
                             )),
                         ListTile(
@@ -40,7 +40,7 @@ class InstructionsSection extends SliverFixedExtentList {
                             ),
                           ),
                           title: Text(
-                              'Click on scan on the next page to get a suggestion',
+                              'Give it a short while before you can get a suggestion of the disease',
                               style: TextStyle(color: kWhite)),
                         ),
                         ListTile(

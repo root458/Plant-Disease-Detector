@@ -4,11 +4,14 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:plant_disease_detector/constants/constants.dart';
 import 'package:plant_disease_detector/services/classify.dart';
+import 'package:plant_disease_detector/services/disease_provider.dart';
 import 'package:plant_disease_detector/src/home_page/components/greeting.dart';
 import 'package:plant_disease_detector/src/home_page/components/history.dart';
 import 'package:plant_disease_detector/src/home_page/components/instructions.dart';
 import 'package:plant_disease_detector/src/home_page/components/titlesection.dart';
+import 'package:plant_disease_detector/src/home_page/models/disease_model.dart';
 import 'package:plant_disease_detector/src/suggestions_page/suggestions.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -17,8 +20,14 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    // Get disease from provider
+    final _diseaseService = Provider.of<DiseaseService>(context);
+
+    // Data
     Size size = MediaQuery.of(context).size;
     final Classifier classifier = Classifier();
+    late Disease _disease;
 
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -33,8 +42,15 @@ class Home extends StatelessWidget {
             ),
             label: "Choose image",
             backgroundColor: kMain,
-            onTap: () {
-              classifier.pickImage(ImageSource.gallery);
+            onTap: () async {
+              await classifier.getDisease(ImageSource.gallery).then((value) {
+                _disease = Disease(
+                    name: value![0]["label"],
+                    imagePath: classifier.imageFile.path);
+
+                // Set disease for Disease Service
+                _diseaseService.setDiseaseValue(_disease);
+              });
               Navigator.restorablePushNamed(
                 context,
                 Suggestions.routeName,
@@ -48,8 +64,15 @@ class Home extends StatelessWidget {
             ),
             label: "Take photo",
             backgroundColor: kMain,
-            onTap: () {
-              classifier.pickImage(ImageSource.camera);
+            onTap: () async {
+              await classifier.getDisease(ImageSource.camera).then((value) {
+                _disease = Disease(
+                    name: value![0]["label"],
+                    imagePath: classifier.imageFile.path);
+
+                // Set disease for Disease Service
+                _diseaseService.setDiseaseValue(_disease);
+              });
               Navigator.restorablePushNamed(
                 context,
                 Suggestions.routeName,

@@ -37,6 +37,8 @@ dependencies:
   flutter_speed_dial: ^5.0.0+1
   font_awesome_flutter: ^9.2.0
   image_picker: ^0.8.4+4
+  tflite: ^1.1.2
+  provider: ^6.0.1
 
 dev_dependencies:
   flutter_test:
@@ -63,6 +65,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/model/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
