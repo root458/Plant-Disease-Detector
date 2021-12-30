@@ -1,10 +1,27 @@
-class Disease {
+import 'package:hive/hive.dart';
+
+part 'disease_model.g.dart';
+
+@HiveType(typeId: 0)
+class Disease extends HiveObject {
+  @HiveField(0)
   final String name;
+
+  @HiveField(1)
   late String possibleCauses;
+
+  @HiveField(2)
   late String possibleSolution;
+
+  @HiveField(3)
   late String imagePath;
 
+  @HiveField(4)
+  late DateTime dateTime;
+
   Disease({required this.name, required this.imagePath}) {
+    dateTime = DateTime.now();
+
     switch (name) {
       case "Pepper Bell Bacterial Spot":
         possibleCauses =
@@ -82,18 +99,24 @@ class Disease {
         break;
 
       case "Tomato Target Spot":
-        possibleCauses = "The fungus Corynespora cassiicola which spreads to plants.";
-        possibleSolution = "Planting resistant varieties, keeping farms free from weeds.";
+        possibleCauses =
+            "The fungus Corynespora cassiicola which spreads to plants.";
+        possibleSolution =
+            "Planting resistant varieties, keeping farms free from weeds.";
         break;
 
       case "Tomato Mosaic Virus":
-        possibleCauses = "Spread by aphids and other insects, mites, fungi, nematodes, and contact; pollen and seeds can carry the infection as well.";
-        possibleSolution = "No cure for infected plants, remove all infected plants and destroy them.";
+        possibleCauses =
+            "Spread by aphids and other insects, mites, fungi, nematodes, and contact; pollen and seeds can carry the infection as well.";
+        possibleSolution =
+            "No cure for infected plants, remove all infected plants and destroy them.";
         break;
 
       case "Tomato Yellow Leaf Curl Virus":
-        possibleCauses = "Physically spread plant-to-plant by the silverleaf whitefly.";
-        possibleSolution = "Chemical control: Imidacloprid should be sprayed on the entire plant and below the leaves.";
+        possibleCauses =
+            "Physically spread plant-to-plant by the silverleaf whitefly.";
+        possibleSolution =
+            "Chemical control: Imidacloprid should be sprayed on the entire plant and below the leaves.";
         break;
 
       default:

@@ -1,28 +1,42 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:plant_disease_detector/constants/constants.dart';
+import 'package:plant_disease_detector/services/hive_database.dart';
+import 'package:plant_disease_detector/src/home_page/models/disease_model.dart';
 
 class HistorySection extends SliverFixedExtentList {
-  HistorySection(Size size, {Key? key})
+  HistorySection(Size size, BuildContext context, {Key? key})
       : super(
           key: key,
           delegate: SliverChildBuilderDelegate(
             (BuildContext context, index) {
-              return Padding(
-                padding: const EdgeInsets.fromLTRB(12.0, 12.0, 0, 0),
-                child: SizedBox(
-                  width: size.width,
-                  child: ListView(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    addAutomaticKeepAlives: false,
-                    itemExtent: size.width * 0.9,
-                    scrollDirection: Axis.horizontal,
-                    children: [
-                      _returnHistoryContainer(),
-                      _returnHistoryContainer(),
-                      _returnHistoryContainer(),
-                    ],
-                  ),
-                ),
+              return ValueListenableBuilder<Box<Disease>>(
+                valueListenable: Boxes.getDiseases().listenable(),
+                builder: (context, box, _) {
+                  final diseases = box.values.toList().cast<Disease>();
+
+                  if (diseases.isNotEmpty) {
+                    return Padding(
+                      padding: const EdgeInsets.fromLTRB(12.0, 12.0, 0, 0),
+                      child: SizedBox(
+                          width: size.width,
+                          child: ListView.builder(
+                            itemCount: diseases.length,
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            itemExtent: size.width * 0.9,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              return _returnHistoryContainer(
+                                  diseases[index], context);
+                            },
+                          )),
+                    );
+                  } else {
+                    return _returnNothingToShow();
+                  }
+                },
               );
             },
             childCount: 1,
@@ -31,14 +45,18 @@ class HistorySection extends SliverFixedExtentList {
         );
 }
 
-Widget _returnHistoryContainer() {
+Widget _returnHistoryContainer(Disease disease, BuildContext context) {
   return Padding(
     padding: const EdgeInsets.fromLTRB(12.0, 0, 12.0, 0),
     child: Container(
         decoration: BoxDecoration(
-            image: const DecorationImage(
-                image: AssetImage('assets/images/pepper.jpg'),
-                fit: BoxFit.cover),
+            image: DecorationImage(
+                image: Image.file(
+              File(disease.imagePath),
+              fit: BoxFit.cover,
+            ).image),
+            // image: AssetImage('assets/images/pepper.jpg'),
+            // fit: BoxFit.cover),
             boxShadow: const [
               BoxShadow(
                 color: kAccent,
@@ -52,15 +70,16 @@ Widget _returnHistoryContainer() {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Text('Disease: Pepper Blight',
-                  style: TextStyle(
+            children: [
+              Text('Disease: ${disease.name}',
+                  style: const TextStyle(
                     color: kWhite,
                     fontSize: 15.0,
                     fontFamily: 'SFBold',
                   )),
-              Text('Date: 12/07/2021',
-                  style: TextStyle(
+              Text(
+                  'Date: ${disease.dateTime.day}/${disease.dateTime.month}/${disease.dateTime.year}',
+                  style: const TextStyle(
                     color: kWhite,
                     fontSize: 15.0,
                     fontFamily: 'SFBold',
@@ -72,15 +91,18 @@ Widget _returnHistoryContainer() {
 }
 
 Widget _returnNothingToShow() {
-  return Container(
-      decoration: BoxDecoration(
-          color: kSecondary, borderRadius: BorderRadius.circular(12.0)),
-      child: const Padding(
-        padding: EdgeInsets.fromLTRB(0, 0, 0, 15),
-        child: Center(
-            child: Text(
-          'Nothing to show',
-          style: TextStyle(color: kWhite),
+  return Padding(
+    padding: const EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 0),
+    child: Container(
+        decoration: BoxDecoration(
+            color: kSecondary, borderRadius: BorderRadius.circular(12.0)),
+        child: const Padding(
+          padding: EdgeInsets.fromLTRB(0, 0, 0, 15),
+          child: Center(
+              child: Text(
+            'Nothing to show',
+            style: TextStyle(color: kWhite),
+          )),
         )),
-      ));
+  );
 }

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:plant_disease_detector/constants/constants.dart';
 import 'package:plant_disease_detector/services/disease_provider.dart';
@@ -13,7 +15,6 @@ class Suggestions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     // Get disease from provider
     final _diseaseService = Provider.of<DiseaseService>(context);
 
@@ -34,7 +35,12 @@ class Suggestions extends StatelessWidget {
             padding: const EdgeInsets.all(15.0),
             child: Column(
               children: [
-                Flexible(child: Center(child: PlantImage(size: size))),
+                Flexible(
+                    child: Center(
+                        child: PlantImage(
+                  size: size,
+                  imageFile: File(_disease.imagePath),
+                ))),
                 const Divider(
                   thickness: 5.0,
                   height: 10.0,

@@ -39,10 +39,15 @@ dependencies:
   image_picker: ^0.8.4+4
   tflite: ^1.1.2
   provider: ^6.0.1
+  hive: ^2.0.5
+  hive_flutter: ^1.1.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  build_runner:
+  hive_generator:
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.suis.plant_disease_detector.plant_disease_detector">
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
    <application
         android:label="Plant Disease Detector"
         android:name="${applicationName}"
