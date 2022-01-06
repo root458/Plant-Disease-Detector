@@ -19,7 +19,7 @@ class TextProperty extends StatelessWidget {
             style: const TextStyle(
               color: kSecondary,
               fontFamily: 'SFBold',
-              fontSize: 30.0,
+              fontSize: 25.0,
             ),
           ),
           subtitle: Text(
@@ -27,7 +27,7 @@ class TextProperty extends StatelessWidget {
             style: const TextStyle(
               color: kSecondary,
               fontFamily: 'SFRegular',
-              fontSize: 20.0,
+              fontSize: 15.0,
             ),
           ),
         )

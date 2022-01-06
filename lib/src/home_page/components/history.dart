@@ -3,11 +3,14 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:plant_disease_detector/constants/constants.dart';
+import 'package:plant_disease_detector/services/disease_provider.dart';
 import 'package:plant_disease_detector/services/hive_database.dart';
 import 'package:plant_disease_detector/src/home_page/models/disease_model.dart';
+import 'package:plant_disease_detector/src/suggestions_page/suggestions.dart';
 
 class HistorySection extends SliverFixedExtentList {
-  HistorySection(Size size, BuildContext context, {Key? key})
+  HistorySection(Size size, BuildContext context, DiseaseService diseaseService,
+      {Key? key})
       : super(
           key: key,
           delegate: SliverChildBuilderDelegate(
@@ -29,7 +32,7 @@ class HistorySection extends SliverFixedExtentList {
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
                               return _returnHistoryContainer(
-                                  diseases[index], context);
+                                  diseases[index], context, diseaseService);
                             },
                           )),
                     );
@@ -45,48 +48,58 @@ class HistorySection extends SliverFixedExtentList {
         );
 }
 
-Widget _returnHistoryContainer(Disease disease, BuildContext context) {
+Widget _returnHistoryContainer(
+    Disease disease, BuildContext context, DiseaseService diseaseService) {
   return Padding(
     padding: const EdgeInsets.fromLTRB(12.0, 0, 12.0, 0),
-    child: Container(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: Image.file(
-              File(disease.imagePath),
-              fit: BoxFit.cover,
-            ).image),
-            // image: AssetImage('assets/images/pepper.jpg'),
-            // fit: BoxFit.cover),
-            boxShadow: const [
-              BoxShadow(
-                color: kAccent,
-                spreadRadius: 0.5,
-                blurRadius: 5.0,
-              ),
-            ],
-            color: kSecondary,
-            borderRadius: BorderRadius.circular(12.0)),
-        child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('Disease: ${disease.name}',
-                  style: const TextStyle(
-                    color: kWhite,
-                    fontSize: 15.0,
-                    fontFamily: 'SFBold',
-                  )),
-              Text(
-                  'Date: ${disease.dateTime.day}/${disease.dateTime.month}/${disease.dateTime.year}',
-                  style: const TextStyle(
-                    color: kWhite,
-                    fontSize: 15.0,
-                    fontFamily: 'SFBold',
-                  )),
-            ],
-          ),
-        )),
+    child: GestureDetector(
+      onTap: () {
+        // Set disease for Disease Service
+        diseaseService.setDiseaseValue(disease);
+
+        Navigator.restorablePushNamed(
+          context,
+          Suggestions.routeName,
+        );
+      },
+      child: Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: Image.file(
+                File(disease.imagePath),
+                fit: BoxFit.cover,
+              ).image),
+              boxShadow: const [
+                BoxShadow(
+                  color: kAccent,
+                  spreadRadius: 0.5,
+                  blurRadius: 5.0,
+                ),
+              ],
+              color: kSecondary,
+              borderRadius: BorderRadius.circular(12.0)),
+          child: Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Disease: ${disease.name}',
+                    style: const TextStyle(
+                      color: kWhite,
+                      fontSize: 15.0,
+                      fontFamily: 'SFBold',
+                    )),
+                Text(
+                    'Date: ${disease.dateTime.day}/${disease.dateTime.month}/${disease.dateTime.year}',
+                    style: const TextStyle(
+                      color: kWhite,
+                      fontSize: 15.0,
+                      fontFamily: 'SFBold',
+                    )),
+              ],
+            ),
+          )),
+    ),
   );
 }
 

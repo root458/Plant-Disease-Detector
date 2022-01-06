@@ -58,21 +58,30 @@ class _HomeState extends State<Home> {
             label: "Choose image",
             backgroundColor: kMain,
             onTap: () async {
+              late double _confidence;
               await classifier.getDisease(ImageSource.gallery).then((value) {
                 _disease = Disease(
                     name: value![0]["label"],
                     imagePath: classifier.imageFile.path);
 
+                _confidence = value[0]['confidence'];
+              });
+              // Check confidence
+              if (_confidence > 0.8) {
                 // Set disease for Disease Service
                 _diseaseService.setDiseaseValue(_disease);
 
                 // Save disease
                 _hiveService.addDisease(_disease);
-              });
-              Navigator.restorablePushNamed(
-                context,
-                Suggestions.routeName,
-              );
+
+                Navigator.restorablePushNamed(
+                  context,
+                  Suggestions.routeName,
+                );
+              } else {
+                // Display unsure message
+                
+              }
             },
           ),
           SpeedDialChild(
@@ -83,21 +92,32 @@ class _HomeState extends State<Home> {
             label: "Take photo",
             backgroundColor: kMain,
             onTap: () async {
+              late double _confidence;
+
               await classifier.getDisease(ImageSource.camera).then((value) {
                 _disease = Disease(
                     name: value![0]["label"],
                     imagePath: classifier.imageFile.path);
 
+                _confidence = value[0]['confidence'];
+              });
+
+              // Check confidence
+              if (_confidence > 0.8) {
                 // Set disease for Disease Service
                 _diseaseService.setDiseaseValue(_disease);
 
                 // Save disease
                 _hiveService.addDisease(_disease);
-              });
-              Navigator.restorablePushNamed(
-                context,
-                Suggestions.routeName,
-              );
+
+                Navigator.restorablePushNamed(
+                  context,
+                  Suggestions.routeName,
+                );
+              } else {
+                // Display unsure message
+                
+              }
             },
           ),
         ],
@@ -113,7 +133,7 @@ class _HomeState extends State<Home> {
             TitleSection('Instructions', 50.0),
             InstructionsSection(size),
             TitleSection('Your History', 50.0),
-            HistorySection(size, context)
+            HistorySection(size, context, _diseaseService)
           ],
         ),
       ),
