@@ -8,25 +8,25 @@ class GreetingSection extends SliverFixedExtentList {
           delegate: SliverChildBuilderDelegate(
             (BuildContext context, index) {
               return Padding(
-                padding: const EdgeInsets.fromLTRB(12.0, 0, 12.0, 12.0),
+                padding: EdgeInsets.fromLTRB((0.079*height), 0, (0.079*height), (0.079*height)),
                 child: Container(
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     color: kSecondary,
                     borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(12.0),
-                        bottomRight: Radius.circular(12.0)),
+                        bottomLeft: Radius.circular((0.079*height)),
+                        bottomRight: Radius.circular((0.079*height))),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(14, 0, 0, 15),
+                    padding: EdgeInsets.fromLTRB((0.092*height), 0, 0, (0.099*height)),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
+                      children: [
                         Text(
                           'Plant Disease Detector',
                           style: TextStyle(
                               fontFamily: 'SFBold',
-                              fontSize: 30.0,
+                              fontSize: (0.2*height),
                               color: kWhite),
                         ),
                       ],

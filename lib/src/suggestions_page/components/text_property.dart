@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:plant_disease_detector/constants/constants.dart';
 
 class TextProperty extends StatelessWidget {
-  const TextProperty({Key? key, required this.title, required this.value})
+  const TextProperty(
+      {Key? key,
+      required this.title,
+      required this.value,
+      required this.height})
       : super(key: key);
 
   final String title;
+  final double height;
   final String value;
 
   @override
@@ -16,18 +21,18 @@ class TextProperty extends StatelessWidget {
         ListTile(
           title: Text(
             title,
-            style: const TextStyle(
+            style: TextStyle(
               color: kSecondary,
               fontFamily: 'SFBold',
-              fontSize: 25.0,
+              fontSize: (0.039 * height),
             ),
           ),
           subtitle: Text(
             value,
-            style: const TextStyle(
+            style: TextStyle(
               color: kSecondary,
               fontFamily: 'SFRegular',
-              fontSize: 15.0,
+              fontSize: (0.026 * height),
             ),
           ),
         )

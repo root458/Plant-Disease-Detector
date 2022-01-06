@@ -8,15 +8,21 @@ class InstructionsSection extends SliverFixedExtentList {
           delegate: SliverChildBuilderDelegate(
             (BuildContext context, index) {
               return Padding(
-                padding: const EdgeInsets.fromLTRB(12, 14.0, 15, 12.0),
+                padding: EdgeInsets.fromLTRB(
+                    (0.061 * size.height * 0.26),
+                    (0.071 * size.height * 0.26),
+                    (0.076 * size.height * 0.26),
+                    (0.061 * size.height * 0.26)),
                 child: Container(
-                  height: size.height * 0.27,
+                  height: size.height * 0.26,
                   decoration: BoxDecoration(
                     color: kSecondary,
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius:
+                        BorderRadius.circular((0.061 * size.height * 0.26)),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(5, 0, 0, 5),
+                    padding: EdgeInsets.fromLTRB((0.025 * size.height * 0.26),
+                        0, 0, (0.025 * size.height * 0.26)),
                     child: ListView(
                       children: const [
                         ListTile(

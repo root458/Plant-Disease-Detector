@@ -22,22 +22,24 @@ class HistorySection extends SliverFixedExtentList {
 
                   if (diseases.isNotEmpty) {
                     return Padding(
-                      padding: const EdgeInsets.fromLTRB(12.0, 12.0, 0, 0),
+                      padding: EdgeInsets.fromLTRB((0.053 * size.height * 0.3),
+                          (0.053 * size.height * 0.3), 0, 0),
                       child: SizedBox(
                           width: size.width,
                           child: ListView.builder(
                             itemCount: diseases.length,
-                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            padding: EdgeInsets.symmetric(
+                                vertical: (0.035 * size.height * 0.3)),
                             itemExtent: size.width * 0.9,
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
-                              return _returnHistoryContainer(
-                                  diseases[index], context, diseaseService);
+                              return _returnHistoryContainer(diseases[index],
+                                  context, diseaseService, size);
                             },
                           )),
                     );
                   } else {
-                    return _returnNothingToShow();
+                    return _returnNothingToShow(size);
                   }
                 },
               );
@@ -48,10 +50,11 @@ class HistorySection extends SliverFixedExtentList {
         );
 }
 
-Widget _returnHistoryContainer(
-    Disease disease, BuildContext context, DiseaseService diseaseService) {
+Widget _returnHistoryContainer(Disease disease, BuildContext context,
+    DiseaseService diseaseService, Size size) {
   return Padding(
-    padding: const EdgeInsets.fromLTRB(12.0, 0, 12.0, 0),
+    padding: EdgeInsets.fromLTRB(
+        (0.053 * size.height * 0.3), 0, (0.053 * size.height * 0.3), 0),
     child: GestureDetector(
       onTap: () {
         // Set disease for Disease Service
@@ -69,31 +72,31 @@ Widget _returnHistoryContainer(
                 File(disease.imagePath),
                 fit: BoxFit.cover,
               ).image),
-              boxShadow: const [
+              boxShadow: [
                 BoxShadow(
                   color: kAccent,
                   spreadRadius: 0.5,
-                  blurRadius: 5.0,
+                  blurRadius: (0.022 * size.height * 0.3),
                 ),
               ],
               color: kSecondary,
-              borderRadius: BorderRadius.circular(12.0)),
+              borderRadius: BorderRadius.circular((0.053 * size.height * 0.3))),
           child: Center(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text('Disease: ${disease.name}',
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: kWhite,
-                      fontSize: 15.0,
+                      fontSize: (0.066 * size.height * 0.3),
                       fontFamily: 'SFBold',
                     )),
                 Text(
                     'Date: ${disease.dateTime.day}/${disease.dateTime.month}/${disease.dateTime.year}',
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: kWhite,
-                      fontSize: 15.0,
+                      fontSize: (0.066 * size.height * 0.3),
                       fontFamily: 'SFBold',
                     )),
               ],
@@ -103,15 +106,17 @@ Widget _returnHistoryContainer(
   );
 }
 
-Widget _returnNothingToShow() {
+Widget _returnNothingToShow(Size size) {
   return Padding(
-    padding: const EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 0),
+    padding: EdgeInsets.fromLTRB((0.053 * size.height * 0.3),
+        (0.053 * size.height * 0.3), (0.053 * size.height * 0.3), 0),
     child: Container(
         decoration: BoxDecoration(
-            color: kSecondary, borderRadius: BorderRadius.circular(12.0)),
-        child: const Padding(
-          padding: EdgeInsets.fromLTRB(0, 0, 0, 15),
-          child: Center(
+            color: kSecondary,
+            borderRadius: BorderRadius.circular((0.053 * size.height * 0.3))),
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(0, 0, 0, (0.066 * size.height * 0.3)),
+          child: const Center(
               child: Text(
             'Nothing to show',
             style: TextStyle(color: kWhite),

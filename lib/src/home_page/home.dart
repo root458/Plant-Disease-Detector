@@ -80,7 +80,7 @@ class _HomeState extends State<Home> {
                 );
               } else {
                 // Display unsure message
-                
+
               }
             },
           ),
@@ -116,7 +116,7 @@ class _HomeState extends State<Home> {
                 );
               } else {
                 // Display unsure message
-                
+
               }
             },
           ),
@@ -130,9 +130,9 @@ class _HomeState extends State<Home> {
         child: CustomScrollView(
           slivers: [
             GreetingSection(size.height * 0.2),
-            TitleSection('Instructions', 50.0),
+            TitleSection('Instructions', size.height * 0.066),
             InstructionsSection(size),
-            TitleSection('Your History', 50.0),
+            TitleSection('Your History', size.height * 0.066),
             HistorySection(size, context, _diseaseService)
           ],
         ),

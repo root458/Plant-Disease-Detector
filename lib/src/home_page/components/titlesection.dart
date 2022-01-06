@@ -12,10 +12,10 @@ class TitleSection extends SliverFixedExtentList {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
+                padding: EdgeInsets.fromLTRB((0.32*height), 0, 0, 0),
                 child: Text(
                   title,
-                  style: const TextStyle(fontSize: 30.0, fontFamily: 'SFBold', color: kMain),
+                  style: TextStyle(fontSize: (0.6*height), fontFamily: 'SFBold', color: kMain),
                 ),
               ),
                 ],
