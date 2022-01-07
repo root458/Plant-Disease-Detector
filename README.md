@@ -7,8 +7,8 @@ A Flutter app that detects a plant's disease given a photo of an affected part o
 - A little knowledge of Dart and Flutter.
 
 ## Additional Info
-Packages used include: tflite, hive, hive_flutter, image_picker, provider
-Model used and label are found in the <i>assets/model</i> folder. You can replace it with your own.
+Packages used include: tflite, hive, hive_flutter, image_picker, provider.
+Model used and labels file are found in the <i>assets/model</i> folder. You can replace them with your own.
 
 Have fun!
 
