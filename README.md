@@ -10,8 +10,8 @@ A Flutter app that detects a plant's disease given a photo of an affected part o
 Packages used include: tflite, hive, hive_flutter, image_picker, provider.
 Model used and labels file are found in the <i>assets/model</i> folder. You can replace them with your own.
 
-Have fun!
-
 ## Demo
 
 ![Recording](plant_disease_detector.gif)
+
+Have fun!
